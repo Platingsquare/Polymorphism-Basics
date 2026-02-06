@@ -1,20 +1,69 @@
-// Polymorphism Basics.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+using namespace std;
 
-int main()
-{
-    std::cout << "Hello World!\n";
+// Basklass med virtual funktion för polymorphism
+class Animal {
+public:
+    virtual void sound() {
+        cout << "Djuret ger ifrån sig ett ljud" << endl;
+    }
+    virtual ~Animal() {}  // Virtual destruktor för korrekt cleanup
+};
+
+// Mellanliggande klass med public inheritance (standard för "är-en" relation)
+class Mammal : public Animal {
+public:
+    void breathe() {
+        cout << "Mammals breath through their lungs" << endl;
+    }
+};
+
+// Hund med public arv från Mammal
+class Dog : public Mammal {
+public:
+    void sound() override {
+        cout << "The Dog Barks: Woof!" << endl;
+    }
+};
+
+// Katt med public arv från Mammal
+class Cat : public Mammal {
+public:
+    void sound() override {
+        cout << "The Cat goes Meow: Meow!" << endl;
+    }
+};
+
+// Fågel med PRIVATE arv från Animal (exempel på private inheritance)
+// Animals publika medlemmar blir privata i Bird – t.ex. kan inte kallas utanför Bird
+class Bird : private Animal {
+public:
+    void sound() override {
+        cout << "The Bird Tweets: Tweet!" << endl;
+    }
+    // Wrapper för att demonstrera tillgång internt
+    void makeSound() {
+        sound();  // Fungerar internt trots private arv
+    }
+    void fly() {
+        cout << "The Bird flies gracefully." << endl;
+    }
+};
+
+int main() {
+    Animal* ptr;  // Pekare till basklass för polymorphism
+
+    // Public arv-exempel
+    Dog dog;
+    ptr = &dog;
+    ptr->sound();  // Polymorfism: Kallar Dogs sound()
+    dog.breathe();
+
+    Cat cat;
+    ptr = &cat;
+    ptr->sound();  // Polymorfism: Kallar Cats sound()
+    cat.breathe();
+
+   
+    return 0;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file

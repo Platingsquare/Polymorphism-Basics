@@ -1,0 +1,6 @@
+﻿Build started at 12:38 AM...
+1>------ Build started: Project: Polymorphism Basics, Configuration: Debug x64 ------
+1>Polymorphism Basics.cpp
+1>Polymorphism Basics.vcxproj -> C:\Users\alexm\source\repos\Polymorphism Basics\x64\Debug\Polymorphism Basics.exe
+========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========
+========== Build completed at 12:38 AM and took 00.707 seconds ==========
